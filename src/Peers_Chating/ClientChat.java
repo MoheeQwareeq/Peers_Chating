@@ -47,8 +47,9 @@ public class ClientChat extends javax.swing.JFrame {
     private DefaultListModel demoList;
     private DataOutputStream outToServer;
     private BufferedReader inFromServer;
+    String path;
 
-    public ClientChat() {
+    public ClientChat(String path_to_save_file_recived) {
         initComponents();
         this.setLocationRelativeTo(null);
         MessegeAreaText.setText("Enter Text Here...");
@@ -64,6 +65,7 @@ public class ClientChat extends javax.swing.JFrame {
         OnlineListe.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         Logout.setEnabled(false);
         Login.setEnabled(true);
+        path = path_to_save_file_recived;
     }
 
     @SuppressWarnings("unchecked")
@@ -540,7 +542,7 @@ public class ClientChat extends javax.swing.JFrame {
                     String str[] = sentence.split("@");
                     addTextToArea("Receive file:" + str[1] + "  Frome: " + receivePacket.getPort() + "\n", true);
                     String s = str[1].trim();
-                    PrintWriter pw = new PrintWriter("/Users/MMM/Desktop/Peers_Chating/" + s);
+                    PrintWriter pw = new PrintWriter(path+ s);
                     pw.println(str[0]);
                     pw.close();
                 } else {

@@ -18,8 +18,8 @@ import javax.swing.text.StyledDocument;
 
 public class Server extends javax.swing.JFrame {
 
-    ArrayList<Socket> onlinelist = new ArrayList<Socket>();
-    ArrayList<String> usernamelist = new ArrayList<String>();
+    ArrayList <Socket> onlinelist = new ArrayList<Socket>();
+    ArrayList <String> usernamelist = new ArrayList<String>();
 
     private int Server_Port;
     private String Server_IP;
@@ -62,6 +62,7 @@ public class Server extends javax.swing.JFrame {
         ServerPort_Text = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(153, 153, 255));
@@ -247,8 +248,10 @@ public class Server extends javax.swing.JFrame {
                         if (usernamelist.get(i).equals(str[0])) {
                             addTextToArea(onlinelist.get(i).getRemoteSocketAddress() + "    LOGOUT\n", true);
                             demoList.clear();
+                            onlinelist.get(i).close();
                             onlinelist.remove(i);
                             usernamelist.remove(i);
+                            
                         }
                     }
 

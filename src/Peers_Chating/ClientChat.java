@@ -298,8 +298,7 @@ public class ClientChat extends javax.swing.JFrame {
 
         try {
 
-            outToServer
-                    = new DataOutputStream(TCPSocket.getOutputStream());
+            outToServer = new DataOutputStream(TCPSocket.getOutputStream());
             outToServer.writeBytes(UserName + ",LOGOUT" + "\n");
             TCPSocket.close();
             UDPSocket.close();
@@ -519,7 +518,16 @@ public class ClientChat extends javax.swing.JFrame {
             Logout.setEnabled(true);
             Login.setEnabled(false);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this,
+            try{
+            demoList.clear();  
+            UDPSocket.close();
+            UDPThread.interrupt();
+            TCPSocket.close();
+            TCPThread.interrupt();
+            System.out.print("test");
+            }catch (Exception e) {}
+            
+              JOptionPane.showMessageDialog(this,
                     "Enter All Field",
                     "Error",
                     JOptionPane.ERROR_MESSAGE);

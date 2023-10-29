@@ -1,6 +1,6 @@
 # Chating_Between_Peers
 
-In this project, we aim to create a versatile chat application that leverages both UDP (User Datagram Protocol) and TCP (Transmission Control Protocol) socket programming. The application will serve as a platform for users to engage in real-time conversations and exchange text files seamlessly.
+In this project, we aim to create a versatile chat application to applied both UDP (User Datagram Protocol) and TCP (Transmission Control Protocol) socket programming. The app allows users to chat in real-time and share text files .
 <img width="1043" alt="Screen Shot 2023-10-05 at 8 29 55 PM" src="https://github.com/MoheeQwareeq/Peers_Chating/assets/143301303/e259369f-6642-4642-8267-74b805fe44cc">
 
 

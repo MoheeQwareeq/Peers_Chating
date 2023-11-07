@@ -48,7 +48,7 @@ public class ClientChat extends javax.swing.JFrame {
     private DataOutputStream outToServer;
     private BufferedReader inFromServer;
     String path;
-    boolean flag ;
+    boolean flag;
 
     public ClientChat(String path_to_save_file_recived) {
         initComponents();
@@ -67,10 +67,9 @@ public class ClientChat extends javax.swing.JFrame {
         Logout.setEnabled(false);
         Login.setEnabled(true);
         Send.setEnabled(false);
-        SendToGroub.setEnabled(false);
         SendFile.setEnabled(false);
         AvilableInterfaces.setEnabled(true);
-        flag= false;
+        flag = false;
         path = path_to_save_file_recived;
     }
 
@@ -108,7 +107,6 @@ public class ClientChat extends javax.swing.JFrame {
         Send = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         OnlineListe = new javax.swing.JList<>();
-        SendToGroub = new javax.swing.JButton();
         File = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
@@ -278,15 +276,6 @@ public class ClientChat extends javax.swing.JFrame {
 
         jPanel2.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 90, 180, 420));
 
-        SendToGroub.setFont(new java.awt.Font("Trattatello", 0, 13)); // NOI18N
-        SendToGroub.setText("Send To Groub");
-        SendToGroub.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SendToGroubActionPerformed(evt);
-            }
-        });
-        jPanel2.add(SendToGroub, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 440, 310, 30));
-
         File.setEditable(false);
         File.setFont(new java.awt.Font("American Typewriter", 3, 18)); // NOI18N
         File.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
@@ -306,7 +295,7 @@ public class ClientChat extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
-    logout();
+        logout();
     }//GEN-LAST:event_LogoutActionPerformed
 
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
@@ -377,40 +366,8 @@ public class ClientChat extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_OnlineListeValueChanged
 
-    private void SendToGroubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SendToGroubActionPerformed
-        byte[] sendData;
-        try {
-
-            String sentence = "";
-            OnlineListe.clearSelection();
-            Remote_IP_Text.setText("");
-            Remote_Port_Text.setText("");
-            for (int i = 0; i < onlinelist.size(); i++) {
-                sentence = MessegeAreaText.getText();
-                if (MessegeAreaText.getText().equals("Enter Text Here...")) {
-                    throw new Exception();
-                }
-                sendData = sentence.getBytes();
-                DatagramPacket sendPacket
-                        = new DatagramPacket(sendData, sendData.length, onlinelist.get(i));
-                UDPSocket.send(sendPacket);
-            }
-            
-            addTextToArea("Me for All: " + sentence + "  " + "\n", false);
-            MessegeAreaText.setText("Enter Text Here...");
-            MessegeAreaText.setForeground(Color.GRAY);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this,
-                    "Enter All Field",
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
-
-        }
-
-    }//GEN-LAST:event_SendToGroubActionPerformed
-
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
-       if(flag)
+        if (flag)
         try {
 
             JFileChooser fileChooser = new JFileChooser();
@@ -454,12 +411,9 @@ public class ClientChat extends javax.swing.JFrame {
             UDPSocket.send(sendPacket);
             addTextToArea("Me: " + selectedFile.getName() + "\n", false);
             File.setText("");
-            OnlineListe.clearSelection();
-            Remote_IP_Text.setText("");
-            Remote_Port_Text.setText("");
             fileReader.close();
             selectedFile = null;
- 
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this,
                     "Can't send your file",
@@ -486,9 +440,6 @@ public class ClientChat extends javax.swing.JFrame {
             addTextToArea("Me: " + sentence + "\n", false);
             MessegeAreaText.setText("Enter Text Here...");
             MessegeAreaText.setForeground(Color.GRAY);
-            Remote_IP_Text.setText("");
-            Remote_Port_Text.setText("");
-            OnlineListe.clearSelection();
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this,
@@ -531,18 +482,18 @@ public class ClientChat extends javax.swing.JFrame {
             Login.setEnabled(false);
             flag = true;
             Send.setEnabled(true);
-            SendToGroub.setEnabled(true);
             SendFile.setEnabled(true);
         } catch (Exception ex) {
-            try{
-            demoList.clear();  
-            UDPSocket.close();
-            UDPThread.interrupt();
-            TCPSocket.close();
-            TCPThread.interrupt();
-            }catch (Exception e) {}
-            
-              JOptionPane.showMessageDialog(this,
+            try {
+                demoList.clear();
+                UDPSocket.close();
+                UDPThread.interrupt();
+                TCPSocket.close();
+                TCPThread.interrupt();
+            } catch (Exception e) {
+            }
+
+            JOptionPane.showMessageDialog(this,
                     "Enter All Field",
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
@@ -565,7 +516,7 @@ public class ClientChat extends javax.swing.JFrame {
                     String str[] = sentence.split("@");
                     addTextToArea("Receive file:" + str[1] + "  From: " + receivePacket.getPort() + "\n", true);
                     String s = str[1].trim();
-                    PrintWriter pw = new PrintWriter(path+ s);
+                    PrintWriter pw = new PrintWriter(path + s);
                     pw.println(str[0]);
                     pw.close();
                 } else {
@@ -576,8 +527,9 @@ public class ClientChat extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }
-        private void logout() {
-            try {
+
+    private void logout() {
+        try {
 
             outToServer = new DataOutputStream(TCPSocket.getOutputStream());
             outToServer.writeBytes(UserName + ",LOGOUT" + "\n");
@@ -589,18 +541,17 @@ public class ClientChat extends javax.swing.JFrame {
             Logout.setEnabled(false);
             Login.setEnabled(true);
             Send.setEnabled(false);
-            SendToGroub.setEnabled(false);
             SendFile.setEnabled(false);
             AvilableInterfaces.setEnabled(true);
             flag = false;
         } catch (Exception ex) {
         }
-        }
+    }
+
     private void receiveFromServer() {
         try {
             while (true) {
-                inFromServer
-                        = new BufferedReader(new InputStreamReader(TCPSocket.getInputStream()));
+                inFromServer = new BufferedReader(new InputStreamReader(TCPSocket.getInputStream()));
                 String modifiedSentence = inFromServer.readLine();
                 int CountOfOnlineUser;
 
@@ -687,7 +638,6 @@ public class ClientChat extends javax.swing.JFrame {
     private javax.swing.JTextPane ScreenText;
     private javax.swing.JButton Send;
     private javax.swing.JButton SendFile;
-    private javax.swing.JButton SendToGroub;
     private javax.swing.JTextField StatusText;
     private javax.swing.JTextField TCP_Server_IP_Text;
     private javax.swing.JTextField TCP_Server_Port_Text;

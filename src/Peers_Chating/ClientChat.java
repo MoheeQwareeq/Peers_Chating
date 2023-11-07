@@ -72,7 +72,6 @@ public class ClientChat extends javax.swing.JFrame {
         AvilableInterfaces.setEnabled(true);
         flag= false;
         path = path_to_save_file_recived;
-        
     }
 
     @SuppressWarnings("unchecked")
@@ -384,8 +383,8 @@ public class ClientChat extends javax.swing.JFrame {
 
             String sentence = "";
             OnlineListe.clearSelection();
-            Remote_IP_Text.setText("For All");
-            Remote_Port_Text.setText("For All");
+            Remote_IP_Text.setText("");
+            Remote_Port_Text.setText("");
             for (int i = 0; i < onlinelist.size(); i++) {
                 sentence = MessegeAreaText.getText();
                 if (MessegeAreaText.getText().equals("Enter Text Here...")) {
@@ -396,7 +395,7 @@ public class ClientChat extends javax.swing.JFrame {
                         = new DatagramPacket(sendData, sendData.length, onlinelist.get(i));
                 UDPSocket.send(sendPacket);
             }
-
+            
             addTextToArea("Me for All: " + sentence + "  " + "\n", false);
             MessegeAreaText.setText("Enter Text Here...");
             MessegeAreaText.setForeground(Color.GRAY);
@@ -455,6 +454,9 @@ public class ClientChat extends javax.swing.JFrame {
             UDPSocket.send(sendPacket);
             addTextToArea("Me: " + selectedFile.getName() + "\n", false);
             File.setText("");
+            OnlineListe.clearSelection();
+            Remote_IP_Text.setText("");
+            Remote_Port_Text.setText("");
             fileReader.close();
             selectedFile = null;
  
@@ -484,7 +486,9 @@ public class ClientChat extends javax.swing.JFrame {
             addTextToArea("Me: " + sentence + "\n", false);
             MessegeAreaText.setText("Enter Text Here...");
             MessegeAreaText.setForeground(Color.GRAY);
-
+            Remote_IP_Text.setText("");
+            Remote_Port_Text.setText("");
+            OnlineListe.clearSelection();
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this,
@@ -536,7 +540,6 @@ public class ClientChat extends javax.swing.JFrame {
             UDPThread.interrupt();
             TCPSocket.close();
             TCPThread.interrupt();
-            System.out.print("test");
             }catch (Exception e) {}
             
               JOptionPane.showMessageDialog(this,

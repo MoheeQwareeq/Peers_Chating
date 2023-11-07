@@ -263,7 +263,7 @@ public class ClientChat extends javax.swing.JFrame {
                 SendActionPerformed(evt);
             }
         });
-        jPanel2.add(Send, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 410, 310, 30));
+        jPanel2.add(Send, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 430, 310, 30));
 
         OnlineListe.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
         OnlineListe.setFont(new java.awt.Font("American Typewriter", 3, 12)); // NOI18N
@@ -425,7 +425,6 @@ public class ClientChat extends javax.swing.JFrame {
     private void Send() {
         byte[] sendData;
         try {
-
             Remote_IP = Remote_IP_Text.getText().trim();
             remote_ip = InetAddress.getByName(Remote_IP);
             Remote_Port = Integer.parseInt(Remote_Port_Text.getText());
@@ -440,6 +439,7 @@ public class ClientChat extends javax.swing.JFrame {
             addTextToArea("Me: " + sentence + "\n", false);
             MessegeAreaText.setText("Enter Text Here...");
             MessegeAreaText.setForeground(Color.GRAY);
+            UserNameText.setEditable(false);
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this,
@@ -538,12 +538,21 @@ public class ClientChat extends javax.swing.JFrame {
             TCPThread.interrupt();
             UDPThread.interrupt();
             demoList.clear();
+            StatusText.setText("");
+            ScreenText.setText("");
+            Local_IP_Text.setEditable(true);
+            Local_Port_Text.setEditable(true);
+            Remote_IP_Text.setText("");
+            Remote_Port_Text.setText("");
+            File.setText("");
             Logout.setEnabled(false);
+            UserNameText.setEditable(true);
             Login.setEnabled(true);
             Send.setEnabled(false);
             SendFile.setEnabled(false);
             AvilableInterfaces.setEnabled(true);
             flag = false;
+            
         } catch (Exception ex) {
         }
     }

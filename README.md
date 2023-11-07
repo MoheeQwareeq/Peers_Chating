@@ -16,7 +16,6 @@ Peer-to-Peer Chat Communication
 It's important to note that despite the central role of the TCP server in managing active clients, the actual chat communication remains peer-to-peer. Clients will communicate directly with one another for their conversations, ensuring privacy and direct interaction between users.
 
 
-<img width="1049" alt="Screen Shot 2023-11-06 at 3 26 44 PM" src="https://github.com/MoheeQwareeq/Peers_Chating/assets/143301303/f09bb05e-ac44-4a18-991e-30b1d33c93e1">
 
 File Sharing Capabilities
 
